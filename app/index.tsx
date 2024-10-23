@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
+
 const Homescreen = () => {
   return (
-    <View style={styles.container}>
+    <View className='flex-1 justify-center items-center'>
       <Text>index</Text>
     </View>
   )
@@ -11,11 +12,3 @@ const Homescreen = () => {
 
 export default Homescreen
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-}) 
