@@ -31,6 +31,7 @@ const App = () => {
             <StatusBar style='light' />
           </SafeAreaView>
         </AppGradient>
+
       </ImageBackground>
     </View>
   )
