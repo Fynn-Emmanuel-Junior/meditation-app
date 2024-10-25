@@ -13,7 +13,7 @@ const App = () => {
       <ImageBackground source={beachImage} resizeMode='cover' className='flex-1'>
         <LinearGradient className='flex-1' colors={["rgba(0,0,0,0.4)","rgba(0,0,0,0.8)"]} style={{width: "100%", height: "100%"}}>
           <SafeAreaView className='flex-1 px-1 justify-between'>
-            <View>
+            <View style={styles.header}>
               <Text className='text-center text-white font-bold text-4xl'> Simple Meditation</Text>
               <Text className='text-center text-white text-regular text-2xl mt-3'>
                 Simplifying Meditation for everyone
@@ -34,4 +34,11 @@ const App = () => {
 }
 
 export default App
+
+const styles = StyleSheet.create({
+  header: {
+    marginTop: 10
+  }
+})
+
 
