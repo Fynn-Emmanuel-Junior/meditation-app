@@ -27,7 +27,7 @@ const GuidedAffirmationsGallery = ({title,previews}: GuidedAffirmationsGalleryPr
                                 <Image 
                                     source={item.image} 
                                     resizeMode='cover' 
-                                    style={{width: '100%', height: '100%',borderRadius: 10}}
+                                    style={{width: '100%', height: '100%',borderRadius: 5}}
                                 />
                             </View>
                         </Pressable>
