@@ -3,6 +3,7 @@ import React from 'react'
 import AppGradient from '@/components/AppGradient'
 import AFFIRMATION_GALLERY from '@/constants/affirmation-gallery';
 import GuidedAffirmationsGallery from '@/components/GuidedAffirmationsGallery';
+import { StatusBar } from 'expo-status-bar';
 
 const affirmations = () => {
   return (
@@ -19,6 +20,7 @@ const affirmations = () => {
                 </View>
             </ScrollView>
         </AppGradient>
+        <StatusBar style='light' />
     </View>
   )
 }
