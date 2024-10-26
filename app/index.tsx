@@ -28,10 +28,9 @@ const App = () => {
                 onPress={() => router.push("/nature")}
               />
             </View>
-            <StatusBar style='light' />
           </SafeAreaView>
         </AppGradient>
-
+      <StatusBar style='light' />
       </ImageBackground>
     </View>
   )
@@ -41,7 +40,7 @@ export default App
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: 10
+    marginTop: 30
   }
 })
 
