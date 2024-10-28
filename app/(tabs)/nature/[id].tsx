@@ -3,14 +3,16 @@ import React from 'react'
 import meditationImages from '@/constants/meditation-images'
 import AppGradient from '@/components/AppGradient'
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { useRouter } from 'expo-router';
+import { useRouter,useLocalSearchParams } from 'expo-router';
+
 
 const meditate = () => {
     const router = useRouter();
+    const {id} = useLocalSearchParams();
   return (
     <View className='flex-1'>
         <ImageBackground 
-            source={meditationImages[0]}
+            source={meditationImages[Number(id) - 1]}
             resizeMode='cover'
             className='flex-1'
         >
