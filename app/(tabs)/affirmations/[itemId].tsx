@@ -12,6 +12,7 @@ const AffirmationPractice = () => {
   console.log(itemId);
 
   const [affirmation, setAffirmation] = useState<GalleryPreviewData | null>(null);
+  const [sentences,setSentences] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchAffirmation = () => {
@@ -19,7 +20,18 @@ const AffirmationPractice = () => {
       const foundAffirmation = AFFIRMATION_GALLERY.flatMap(g => g.data).find(
         (a) => a.id === parseInt(itemId as string)
       );
-      setAffirmation(foundAffirmation || null); // Update the state only once
+
+      if(foundAffirmation) {
+        setAffirmation(foundAffirmation || null); // Update the state only once
+
+        const affirmationsArray = foundAffirmation.text.split(".");
+
+        if(affirmationsArray[affirmationsArray.length - 1] === " ") {
+          affirmationsArray.pop(); // Remove the last empty string
+        }
+
+        setSentences(affirmationsArray);
+      }
     };
 
     fetchAffirmation();
@@ -37,7 +49,7 @@ const AffirmationPractice = () => {
         <AppGradient colors={['rgba(0,0,0,0.3)','rgba(0,0,0,0.9)']}>
           <Pressable 
             onPress={() => router.back()}
-            className='absolute top-16 left-6'
+            className='absolute top-16 left-6 z-10'
           >
             <AntDesign name="leftcircleo" size={40} color="white" />
           </Pressable>
@@ -45,10 +57,13 @@ const AffirmationPractice = () => {
             className='mt-20'
             showsVerticalScrollIndicator={false}
           >
-            <View className='h-full justify-center'>
+            <View className='h-full justify-center w-11/12 mx-auto'>
               <View className='h-4/5 justify-center'>
-                <Text>{affirmation?.text}</Text>
-
+              {
+                sentences.map((sentence, index) => (
+                  <Text key={index} className='text-white text-3xl font-bold text-center mb-12'>{sentence}. </Text>
+                ))
+              }
               </View>
             </View>
 
