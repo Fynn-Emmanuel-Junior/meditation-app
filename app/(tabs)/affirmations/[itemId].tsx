@@ -54,7 +54,7 @@ const AffirmationPractice = () => {
             <AntDesign name="leftcircleo" size={40} color="white" />
           </Pressable>
           <ScrollView
-            className='mt-20'
+            style={{marginTop: 100}}
             showsVerticalScrollIndicator={false}
           >
             <View className='h-full justify-center w-11/12 mx-auto'>
