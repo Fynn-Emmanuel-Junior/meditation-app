@@ -25,6 +25,16 @@ const meditate = () => {
                 >
                     <AntDesign name="leftcircleo" size={40} color="white" />
                 </Pressable>
+                <View
+                    className='flex-1 justify-center'
+                >
+                    <View 
+                        className='mx-auto bg-neutral-200 rounded-full w-44 h-44 justify-center items-center'
+                    >
+                        <Text className='text-center'> 00:00</Text>
+                    </View>
+
+                </View>
             </AppGradient>
         </ImageBackground>
     </View>
