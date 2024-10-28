@@ -3,8 +3,10 @@ import React from 'react'
 import meditationImages from '@/constants/meditation-images'
 import AppGradient from '@/components/AppGradient'
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useRouter } from 'expo-router';
 
 const meditate = () => {
+    const router = useRouter();
   return (
     <View className='flex-1'>
         <ImageBackground 
@@ -15,8 +17,11 @@ const meditate = () => {
             <AppGradient
                 colors={['transparent','rgba(0,0,0,0.8)']}
             >
-                <Pressable>
-
+                <Pressable
+                    onPress={() => router.back()}
+                    className='absolute top-16 left-6 z-10' 
+                >
+                    <AntDesign name="leftcircleo" size={40} color="white" />
                 </Pressable>
             </AppGradient>
         </ImageBackground>
