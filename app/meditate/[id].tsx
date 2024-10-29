@@ -11,24 +11,29 @@ const meditate = () => {
     const router = useRouter();
     const {id} = useLocalSearchParams();
     const [secondsRemaining,setSecondsRemaining] = useState(30);
+    const [isMeditating,setMeditating] = useState(false);
 
     useEffect(() => {
         let timerId: NodeJS.Timeout;
 
         // Exit
         if(secondsRemaining === 0) {
+            setMeditating(false);
             return;
         }
 
-        timerId = setTimeout(() => {
-            setSecondsRemaining(secondsRemaining - 1);
-        },1000);
+        if(isMeditating){
+            timerId = setTimeout(() => {
+                setSecondsRemaining(secondsRemaining - 1);
+            },1000);
+        }
+
 
         return () => {
             clearTimeout(timerId);
         }
 
-    },[secondsRemaining]);
+    },[secondsRemaining,isMeditating]);
 
   return (
     <View className='flex-1'>
@@ -60,7 +65,7 @@ const meditate = () => {
                 >
                     <CustomButton 
                         title='State Meditation'
-                        onPress={() => console.log('press')}
+                        onPress={() => setMeditating(true)}
                     />
                 </View>
             </AppGradient>
