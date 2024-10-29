@@ -41,6 +41,7 @@ const meditate = () => {
     },[secondsRemaining,isMeditating]);
 
     useEffect(() => {
+        setDuration(30);
         return () => {
             audio?.unloadAsync();
         }
@@ -118,7 +119,7 @@ const meditate = () => {
                         onPress={handleAdjustMeditationDuration}
                     />
                     <CustomButton 
-                        title={isMeditating ? 'Stop' : 'Start Medatiting'}
+                        title={isMeditating ? 'Stop' : 'Start Meditating'}
                         onPress={toggleMeditationSessionStatus}
                         containerStyles=''
                     />
