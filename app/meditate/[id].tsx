@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View,ImageBackground, Pressable } from 'react-native'
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import meditationImages from '@/constants/meditation-images'
 import AppGradient from '@/components/AppGradient'
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -11,6 +11,24 @@ const meditate = () => {
     const router = useRouter();
     const {id} = useLocalSearchParams();
     const [secondsRemaining,setSecondsRemaining] = useState(30);
+
+    useEffect(() => {
+        let timerId: NodeJS.Timeout;
+
+        // Exit
+        if(secondsRemaining === 0) {
+            return;
+        }
+
+        timerId = setTimeout(() => {
+            setSecondsRemaining(secondsRemaining - 1);
+        },1000);
+
+        return () => {
+            clearTimeout(timerId);
+        }
+
+    },[secondsRemaining]);
 
   return (
     <View className='flex-1'>
@@ -44,7 +62,6 @@ const meditate = () => {
                         title='State Meditation'
                         onPress={() => console.log('press')}
                     />
-
                 </View>
             </AppGradient>
         </ImageBackground>
