@@ -28,7 +28,7 @@ const Nature = () => {
                     showsVerticalScrollIndicator={false}
                     renderItem={({item}) => (
                         <Pressable 
-                            onPress={() => router.push(`/nature/${item.id.toString()}`)}
+                            onPress={() => router.push(`/meditate/${item.id.toString()}`)}
                             className='h-48 my-3  mx-4 rounded-md overflow-hidden'
                         >
                             <ImageBackground

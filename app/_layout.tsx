@@ -9,6 +9,10 @@ export default function  RootLayout() {
                 options={{headerShown: false}}
             />
             <Stack.Screen 
+                name="meditate/[id]"
+                options={{headerShown: false}}
+            />
+            <Stack.Screen 
                 name="index"
                 options={{headerShown: false}}
             />
