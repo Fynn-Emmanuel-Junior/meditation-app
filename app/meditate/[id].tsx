@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View,ImageBackground, Pressable } from 'react-native'
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect, useContext} from 'react'
 import meditationImages from '@/constants/meditation-images'
 import AppGradient from '@/components/AppGradient'
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -7,11 +7,13 @@ import { useRouter,useLocalSearchParams } from 'expo-router';
 import CustomButton from '@/components/CustomButton';
 import {Audio} from 'expo-av';
 import { MEDITATION_DATA,AUDIO_FILES } from '@/constants/MeditationData';
+import { TimeContext } from '@/context/TimerContext';
 
 const meditate = () => {
     const router = useRouter();
+    const { duration: secondsRemaining,setDuration} = useContext(TimeContext);
     const {id} = useLocalSearchParams();
-    const [secondsRemaining,setSecondsRemaining] = useState(30);
+    // const [secondsRemaining,setSecondsRemaining] = useState(30);
     const [isMeditating,setMeditating] = useState(false);
     const [audio,setAudio] = useState<Audio.Sound>();
     const [isPlayingAudio,setPlayingAudio] = useState(false);
@@ -27,7 +29,7 @@ const meditate = () => {
 
         if(isMeditating){
             timerId = setTimeout(() => {
-                setSecondsRemaining(secondsRemaining - 1);
+                setDuration(secondsRemaining - 1);
             },1000);
         }
 
@@ -48,7 +50,7 @@ const meditate = () => {
     const formattedTimeSeconds = String(Math.floor(secondsRemaining % 60)).padStart(2,"0");
 
     const toggleMeditationSessionStatus = async() => {
-        if( secondsRemaining === 0) setSecondsRemaining(30);
+        if( secondsRemaining === 0) setDuration(30);
         setMeditating(!isMeditating);
 
         await toggleSound();
@@ -116,7 +118,7 @@ const meditate = () => {
                         onPress={handleAdjustMeditationDuration}
                     />
                     <CustomButton 
-                        title='State Meditation'
+                        title={isMeditating ? 'Stop' : 'Start Medatiting'}
                         onPress={toggleMeditationSessionStatus}
                         containerStyles=''
                     />

@@ -2,6 +2,7 @@ import { Slot,SplashScreen,Stack } from "expo-router";
 import '../global.css';
 import {useFonts} from 'expo-font';
 import React,{useEffect} from "react";
+import TimerProvider from "@/context/TimerContext";
 
 //Prevent Splasj screen from auto hiding
 SplashScreen.preventAutoHideAsync();
@@ -21,23 +22,25 @@ export default function  RootLayout() {
     }
 
     return (
-        <Stack>
-            <Stack.Screen 
-                name="(tabs)"
-                options={{headerShown: false}}
-            />
-            <Stack.Screen 
-                name="meditate/[id]"
-                options={{headerShown: false}}
-            />
-            <Stack.Screen 
-                name="index"
-                options={{headerShown: false}}
-            />
-            <Stack.Screen 
-                name="(modal)/adjustMeditationDuration"
-                options={{headerShown: false, presentation: "modal"}}
-            />
-        </Stack>
+        <TimerProvider>
+            <Stack>
+                <Stack.Screen 
+                    name="(tabs)"
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen 
+                    name="meditate/[id]"
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen 
+                    name="index"
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen 
+                    name="(modal)/adjustMeditationDuration"
+                    options={{headerShown: false, presentation: "modal"}}
+                />
+            </Stack>
+        </TimerProvider>
     )
 }
