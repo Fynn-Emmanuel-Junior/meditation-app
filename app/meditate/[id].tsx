@@ -5,13 +5,16 @@ import AppGradient from '@/components/AppGradient'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useRouter,useLocalSearchParams } from 'expo-router';
 import CustomButton from '@/components/CustomButton';
-
+import {Audio} from 'expo-av';
+import { MEDITATION_DATA,AUDIO_FILES } from '@/constants/MeditationData';
 
 const meditate = () => {
     const router = useRouter();
     const {id} = useLocalSearchParams();
     const [secondsRemaining,setSecondsRemaining] = useState(30);
     const [isMeditating,setMeditating] = useState(false);
+    const [audio,setAudio] = useState<Audio.Sound>();
+    const [isPlayingAudio,setPlayingAudio] = useState(false);
 
     useEffect(() => {
         let timerId: NodeJS.Timeout;
@@ -37,6 +40,37 @@ const meditate = () => {
 
     const formattedTimeMinutes = String(Math.floor(secondsRemaining / 60)).padStart(2,"0");
     const formattedTimeSeconds = String(Math.floor(secondsRemaining % 60)).padStart(2,"0");
+
+    const toggleMeditationSessionStatus = async() => {
+        if( secondsRemaining === 0) setSecondsRemaining(30);
+        setMeditating(!isMeditating);
+
+        await toggleSound();
+    }
+
+    const toggleSound = async() => {
+        const sound = audio ? audio : await initializeSound();  
+        
+        const status = await sound?.getStatusAsync();
+
+        if(status?.isLoaded && isPlayingAudio) {
+            await sound.playAsync();
+            setPlayingAudio(true);
+        } else {
+            await sound.pauseAsync();
+            setPlayingAudio(false);
+        }
+    }
+
+    const initializeSound = async() => {
+        const audioFileName = MEDITATION_DATA[Number(id) -1].audio;
+        const {sound } = await Audio.Sound.createAsync(
+            AUDIO_FILES[audioFileName]
+        ); 
+
+        setAudio(sound);
+        return sound;
+    }
 
   return (
     <View className='flex-1'>
@@ -68,7 +102,7 @@ const meditate = () => {
                 >
                     <CustomButton 
                         title='State Meditation'
-                        onPress={() => setMeditating(true)}
+                        onPress={toggleMeditationSessionStatus}
                     />
                 </View>
             </AppGradient>
