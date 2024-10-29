@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View,ImageBackground, Pressable } from 'react-native'
-import React from 'react'
+import React,{useState} from 'react'
 import meditationImages from '@/constants/meditation-images'
 import AppGradient from '@/components/AppGradient'
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -10,6 +10,8 @@ import CustomButton from '@/components/CustomButton';
 const meditate = () => {
     const router = useRouter();
     const {id} = useLocalSearchParams();
+    const [secondsRemaining,setSecondsRemaining] = useState(30);
+
   return (
     <View className='flex-1'>
         <ImageBackground 
@@ -32,7 +34,7 @@ const meditate = () => {
                     <View 
                         className='mx-auto bg-neutral-200 rounded-full w-44 h-44 justify-center items-center'
                     >
-                        <Text className='text-center text-4xl text-blue-800'> 00:00</Text>
+                        <Text className='text-center text-4xl text-blue-800'> 00:{secondsRemaining}</Text>
                     </View>
                 </View>
                 <View
