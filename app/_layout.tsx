@@ -34,6 +34,10 @@ export default function  RootLayout() {
                 name="index"
                 options={{headerShown: false}}
             />
+            <Stack.Screen 
+                name="(modal)/adjustMeditationDuration"
+                options={{headerShown: false, presentation: "modal"}}
+            />
         </Stack>
     )
 }

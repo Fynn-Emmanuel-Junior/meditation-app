@@ -38,6 +38,12 @@ const meditate = () => {
 
     },[secondsRemaining,isMeditating]);
 
+    useEffect(() => {
+        return () => {
+            audio?.unloadAsync();
+        }
+    },[audio])
+
     const formattedTimeMinutes = String(Math.floor(secondsRemaining / 60)).padStart(2,"0");
     const formattedTimeSeconds = String(Math.floor(secondsRemaining % 60)).padStart(2,"0");
 
@@ -72,6 +78,11 @@ const meditate = () => {
         return sound;
     }
 
+    const handleAdjustMeditationDuration = () => {
+        if(isMeditating) toggleMeditationSessionStatus();
+        router.push("/(modal)/adjustMeditationDuration");
+    }
+
   return (
     <View className='flex-1'>
         <ImageBackground 
@@ -101,8 +112,13 @@ const meditate = () => {
                     className='mb-5'
                 >
                     <CustomButton 
+                        title='Adjust duration'
+                        onPress={handleAdjustMeditationDuration}
+                    />
+                    <CustomButton 
                         title='State Meditation'
                         onPress={toggleMeditationSessionStatus}
+                        containerStyles=''
                     />
                 </View>
             </AppGradient>
